@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block body %}
+<p class="brand">Admin {{ app_name }}</p>
+<h1>Menunggu bayar</h1>
+{% for o in waiting %}
+  <div class="card row">
+    <div>
+      <strong>{{ fmt_rp(o.amount) }}</strong>
+      <div>{{ o.pack }} · {{ o.wa or '-' }}</div>
+    </div>
+    <form method="post" action="{{ url_for('admin_mark_paid', order_id=o.id) }}">
+      <button type="submit">Dana masuk</button>
+    </form>
+  </div>
+{% else %}
+  <p>Tidak ada antrian.</p>
+{% endfor %}
+
+<h2>Sudah aktif</h2>
+{% for o in paid %}
+  <div class="card">
+    <strong>{{ fmt_rp(o.amount) }}</strong> · sisa {{ o.minutes_left }} menit
+    <div><a href="{{ url_for('chat_page', token=o.token) }}">{{ url_for('chat_page', token=o.token, _external=True) }}</a></div>
+  </div>
+{% endfor %}
+<p><a href="{{ url_for('logout') }}">Keluar</a></p>
+{% endblock %}

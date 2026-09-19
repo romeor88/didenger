@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block body %}
+<p class="brand">{{ app_name }}</p>
+<h1>Transfer bank tepat {{ amount_fmt }}</h1>
+<p class="lead">Angka belakang adalah kode pesananmu. Transfer nominal ini persis. Jangan dibulatkan.</p>
+
+<div class="card">
+  <p><strong>Transfer bank ke</strong></p>
+  <p>Bank: <strong>Bank Central Asia</strong></p>
+  <p>No. rekening: <strong>218.167.68.78</strong></p>
+  <p>a.n. <strong>romeo bernardo santoso reijman</strong></p>
+  <p class="amount">{{ amount_fmt }}</p>
+  <p>Paket: {{ pack.name }} · {{ pack.label }}</p>
+  <p>Status: <strong>{{ order.status }}</strong></p>
+  <p class="fine">Contoh: layar bilang Rp 9.901 → transfer Rp 9.901. Bukan Rp 9.900 dan bukan Rp 10.000.</p>
+  {% if order.status != 'paid' %}
+    <a class="btn" href="{{ wa_link }}">Saya sudah transfer — konfirmasi WA</a>
+    <p class="fine">Setelah admin lihat dana masuk, kamu dapat link chat.</p>
+    <p><a href="{{ url_for('chat_page', token=order.token) }}">Coba buka ruang chat</a></p>
+  {% else %}
+    <a class="btn" href="{{ url_for('chat_page', token=order.token) }}">Masuk ruang curhat</a>
+  {% endif %}
+</div>
+{% endblock %}

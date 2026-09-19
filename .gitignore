@@ -1,0 +1,4 @@
+.venv/
+didenger.db
+.env
+__pycache__/

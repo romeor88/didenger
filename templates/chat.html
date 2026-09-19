@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block body %}
+<p class="brand">{{ app_name }} · sisa <span id="mins">{{ order.minutes_left }}</span> menit</p>
+<div id="log" class="log">
+  {% for m in messages %}
+    <div class="bubble {{ m.role }}">{{ m.content }}</div>
+  {% endfor %}
+</div>
+<form id="f" class="composer">
+  <textarea id="msg" rows="2" placeholder="Cerita aja. Pelan-pelan juga boleh." required></textarea>
+  <button type="submit">Kirim</button>
+</form>
+<p class="fine">Kalau darurat: 119 ext. 8. Ini teman AI, bukan tenaga kesehatan.</p>
+<script>
+const token = {{ token|tojson }};
+const log = document.getElementById('log');
+const f = document.getElementById('f');
+const msg = document.getElementById('msg');
+function add(role, text) {
+  const d = document.createElement('div');
+  d.className = 'bubble ' + role;
+  d.textContent = text;
+  log.appendChild(d);
+  log.scrollTop = log.scrollHeight;
+}
+f.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const text = msg.value.trim();
+  if (!text) return;
+  msg.value = '';
+  add('user', text);
+  const res = await fetch('/api/chat', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({token, message: text})
+  });
+  const data = await res.json();
+  if (data.reply) {
+    add('assistant', data.reply);
+    if (data.minutes_left !== undefined) document.getElementById('mins').textContent = data.minutes_left;
+  } else {
+    add('assistant', data.error || 'Gagal kirim');
+  }
+});
+log.scrollTop = log.scrollHeight;
+</script>
+{% endblock %}

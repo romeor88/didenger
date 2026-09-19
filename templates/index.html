@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block body %}
+<p class="brand">{{ app_name }}</p>
+<h1>Jam 1 pagi, gabisa cerita ke siapa.</h1>
+<p class="lead">Curhat di sini. Didengar, nggak dihakimi. AI, bukan manusia. Rahasia.</p>
+
+<form method="post" action="{{ url_for('create_order') }}" class="card">
+  <label class="pack">
+    <input type="radio" name="pack" value="try" checked>
+    <div>
+      <strong>Coba dulu — Rp 9.900</strong>
+      <span>60 menit chat</span>
+    </div>
+  </label>
+  <label class="pack">
+    <input type="radio" name="pack" value="plus">
+    <div>
+      <strong>Plong dulu — Rp 19.900</strong>
+      <span>3 sesi x 45 menit</span>
+    </div>
+  </label>
+  <label class="pack">
+    <input type="radio" name="pack" value="week">
+    <div>
+      <strong>Teman seminggu — Rp 29.900</strong>
+      <span>7 hari, max 20 menit/hari</span>
+    </div>
+  </label>
+
+  <label class="field">Nomor WhatsApp (opsional)
+    <input type="text" name="wa" placeholder="08xxxxxxxxxx">
+  </label>
+  <label class="check">
+    <input type="checkbox" name="age" value="yes" required>
+    Saya 18 tahun ke atas. Saya paham ini AI, bukan psikolog.
+  </label>
+  <button type="submit">Ambil kode transfer</button>
+</form>
+
+<div class="fine">
+  <p>Bukan diagnosis. Bukan obat. Kalau ada pikiran nyakitin diri: <strong>119 ext. 8</strong> atau IGD.</p>
+  <p>Konfirmasi bayar WA: <a href="https://wa.me/{{ wa }}">chat admin</a></p>
+</div>
+{% endblock %}
