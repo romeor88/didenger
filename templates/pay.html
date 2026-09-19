@@ -1,22 +1,19 @@
 {% extends "base.html" %}
 {% block body %}
 <p class="brand">{{ app_name }}</p>
-<h1>Transfer bank tepat {{ amount_fmt }}</h1>
-<p class="lead">Angka belakang adalah kode pesananmu. Transfer nominal ini persis. Jangan dibulatkan.</p>
+<h1>Transfer tepat</h1>
+<p class="amount">{{ amount_fmt }}</p>
+<p class="lead">Nominal harus sama persis. Itu kode pesananmu.</p>
 
-<div class="card">
-  <p><strong>Transfer bank ke</strong></p>
-  <p>Bank: <strong>Bank Central Asia</strong></p>
-  <p>No. rekening: <strong>218.167.68.78</strong></p>
-  <p>a.n. <strong>romeo bernardo santoso reijman</strong></p>
-  <p class="amount">{{ amount_fmt }}</p>
+<div class="card bank">
+  <div>Bank<br><b>Bank Central Asia</b></div>
+  <div style="margin-top:10px">No. rekening<br><b>2181676878</b></div>
+  <div style="margin-top:10px">a.n.<br><b>Romeo Bernardo Santoso Reijman</b></div>
   <p>Paket: {{ pack.name }} · {{ pack.label }}</p>
   <p>Status: <strong>{{ order.status }}</strong></p>
-  <p class="fine">Contoh: layar bilang Rp 9.901 → transfer Rp 9.901. Bukan Rp 9.900 dan bukan Rp 10.000.</p>
   {% if order.status != 'paid' %}
-    <a class="btn" href="{{ wa_link }}">Saya sudah transfer — konfirmasi WA</a>
-    <p class="fine">Setelah admin lihat dana masuk, kamu dapat link chat.</p>
-    <p><a href="{{ url_for('chat_page', token=order.token) }}">Coba buka ruang chat</a></p>
+    <a class="btn" href="{{ wa_link }}">Saya sudah transfer</a>
+    <p class="fine">Kirim bukti + nominal ke WA. Admin aktifkan sesi.</p>
   {% else %}
     <a class="btn" href="{{ url_for('chat_page', token=order.token) }}">Masuk ruang curhat</a>
   {% endif %}
