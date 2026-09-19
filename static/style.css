@@ -130,3 +130,9 @@ button, .btn {
 .row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .row button { width: auto; margin: 0; }
 .flash { background: #3b2a12; padding: 10px 12px; border-radius: 12px; margin-bottom: 12px; }
+
+.h2 { font-size: 18px; margin: 28px 0 10px; font-weight: 650; }
+.why, .steps { margin: 0 0 18px; padding-left: 18px; color: var(--mute); line-height: 1.55; font-size: 15px; }
+.why li, .steps li { margin: 8px 0; }
+.faq p { color: var(--mute); font-size: 14px; line-height: 1.5; margin: 0 0 14px; }
+.faq strong { color: var(--text); }

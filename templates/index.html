@@ -1,44 +1,74 @@
 {% extends "base.html" %}
 {% block body %}
 <p class="brand">{{ app_name }}</p>
-<h1>Jam 1 pagi, gabisa cerita ke siapa.</h1>
-<p class="lead">Curhat di sini. Didengar, nggak dihakimi. AI, bukan manusia. Rahasia.</p>
+<h1>Jam 1 pagi.<br>Chat dibuka, ditutup lagi.</h1>
+<p class="lead">Kalau gabisa cerita ke orang, cerita di sini. Didenger dengerin. Nggak ceramah. Nggak dihakimi.</p>
+
+<div class="card">
+  <p><strong>Ini bukan psikolog.</strong> Ini teman curhat AI. Bukan manusia. Bukan diagnosis. Bukan obat.</p>
+</div>
+
+<h2 class="h2">Kenapa orang bayar</h2>
+<ul class="why">
+  <li>Temen sudah tidur. Ortu jangan dulu. Pacar lagi ribet.</li>
+  <li>Kamu cuma butuh didenger, bukan 10 nasihat.</li>
+  <li>Masuk pakai link. Nggak perlu akun. Nggak muncul di feed.</li>
+  <li>Selesai bayar, chat langsung. 24 jam.</li>
+</ul>
+
+<h2 class="h2">Cara kerja</h2>
+<ol class="steps">
+  <li>Pilih paket di bawah.</li>
+  <li>Transfer bank <em>persis</em> nominal di layar (contoh Rp 9.901).</li>
+  <li>Konfirmasi WA. Admin aktifkan.</li>
+  <li>Masuk ruang chat. Ketik pelan-pelan juga boleh.</li>
+</ol>
+
+<p class="fine">Kalau darurat atau ada pikiran nyakitin diri: <strong>119 ext. 8</strong> atau IGD. Jangan andalkan bot ini.</p>
 
 <form method="post" action="{{ url_for('create_order') }}" class="card">
-   <label class="pack">
+  <h2 class="h2" style="margin-top:0">Ambil waktu curhat</h2>
+
+  <label class="pack">
     <input type="radio" name="pack" value="try" checked>
     <div>
       <strong>Coba dulu <span class="price">Rp 9.900</span></strong>
-      <span>60 menit chat</span>
+      <span>60 menit. Buat yang baru mau coba.</span>
     </div>
   </label>
   <label class="pack">
     <input type="radio" name="pack" value="plus">
     <div>
       <strong>Plong dulu <span class="price">Rp 19.900</span></strong>
-      <span>3 sesi × 45 menit</span>
+      <span>3 sesi × 45 menit. Kalau satu malam belum cukup.</span>
     </div>
   </label>
   <label class="pack">
     <input type="radio" name="pack" value="week">
     <div>
       <strong>Seminggu <span class="price">Rp 29.900</span></strong>
-      <span>7 hari, max 20 menit/hari</span>
+      <span>7 hari, max 20 menit/hari. Buat yang sering balik malam.</span>
     </div>
   </label>
 
-  <label class="field">Nomor WhatsApp (opsional)
+  <label class="field">Nomor WhatsApp (opsional, biar gampang dikasih link)
     <input type="text" name="wa" placeholder="08xxxxxxxxxx">
   </label>
   <label class="check">
     <input type="checkbox" name="age" value="yes" required>
-    Saya 18 tahun ke atas. Saya paham ini AI, bukan psikolog.
+    Saya 18+. Saya paham ini AI, bukan psikolog, bukan tenaga kesehatan.
   </label>
   <button type="submit">Ambil kode transfer</button>
+  <p class="fine">Nominal unik = kode pesananmu. Jangan dibulatkan.</p>
 </form>
 
-<div class="fine">
-  <p>Bukan diagnosis. Bukan obat. Kalau ada pikiran nyakitin diri: <strong>119 ext. 8</strong> atau IGD.</p>
-  <p>Konfirmasi bayar WA: <a href="https://wa.me/{{ wa }}">chat admin</a></p>
+<h2 class="h2">Yang orang tanya</h2>
+<div class="faq">
+  <p><strong>Rahasia nggak?</strong><br>Kami nggak posting chat kamu. Tetap jangan kirim data KTP / rekening.</p>
+  <p><strong>Kenapa bukan Rp 9.900 pas?</strong><br>Angka belakang (9.901, 9.902) biar admin tau itu kamu.</p>
+  <p><strong>Kalau transfer salah nominal?</strong><br>WA bukti + jam. Jangan transfer kedua kali sebelum dibalas.</p>
+  <p><strong>Ini manusia?</strong><br>Bukan. Bot. Kalau kamu butuh orang sungguhan, cari teman atau layanan resmi.</p>
 </div>
+
+<p class="fine">Konfirmasi bayar: <a href="https://wa.me/{{ wa }}">WhatsApp admin</a></p>
 {% endblock %}
